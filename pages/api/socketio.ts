@@ -11,9 +11,12 @@ const socketHandler = (req: NextApiRequest, res: NextApiResponseServerIO) => {
 
     //const httpServer = res.socket.server;
       const httpServer: NetServer = res.socket.server as any;
-       const io = new ServerIO(httpServer, { path: SOCKET_PATH });
-       res.socket.server.io = io;
-     
+      const io = new ServerIO(httpServer, {
+        path: SOCKET_PATH,
+        // @ts-ignore
+        addTrailingSlash: false,
+      });
+      res.socket.server.io = io;
 
     io.on("connection", (socket) => {
       console.log("connected");
