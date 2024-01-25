@@ -1,15 +1,15 @@
-import { Socket as NetSocket } from 'net';
-import { Server as HTTPServer } from 'http';
-import { NextApiResponse } from 'next/types';
-import { Server as SocketIOServer } from 'socket.io';
+import { Server as NetServer, Socket } from "net";
+import { Server as HTTPServer } from "http";
+import { NextApiResponse } from "next/types";
+import { Server as SocketIOServer } from "socket.io";
 //@ts-ignore
-import { DefaultEventsMap } from 'socket.io/dist/typed-events';
-import { Socket as ClientSocket } from 'socket.io-client';
+import { DefaultEventsMap } from "socket.io/dist/typed-events";
+import { Socket as ClientSocket } from "socket.io-client";
 
 
 export type NextApiResponseServerIO = NextApiResponse & {
-  socket: NetSocket & {
-    server: HTTPServer & {
+  socket: Socket & {
+    server: NetServer & {
       io: SocketIOServer;
     };
   };
@@ -32,7 +32,6 @@ export type AppendVideoStream = ({
 
 export type PeerId = string;
 
-
 export type UserMessage = {
   user: string;
   text: string;
@@ -40,11 +39,11 @@ export type UserMessage = {
   shouldAggregate: boolean;
 };
 
-export type Status = 'loading' | 'idle' | 'rejected' | 'success';
+export type Status = "loading" | "idle" | "rejected" | "success";
 export type Kind =
-  | 'audio'
-  | 'video'
-  | 'chat'
-  | 'users'
-  | 'screen'
-  | 'fullscreen';
+  | "audio"
+  | "video"
+  | "chat"
+  | "users"
+  | "screen"
+  | "fullscreen";
