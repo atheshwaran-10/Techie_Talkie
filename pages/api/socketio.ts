@@ -15,7 +15,7 @@ const socketHandler = (req: NextApiRequest, res: NextApiResponseServerIO) => {
         path: SOCKET_PATH,
         // @ts-ignore
         addTrailingSlash: false,
-        transports: ["polling", "websocket"],
+        transports: [ "websocket","polling"],
         // @ts-ignore
         secure: true,
       });
