@@ -20,3 +20,6 @@ export const SocketIndicator = () => {
     </Badge>
   );
 };
+
+
+export default SocketIndicator;
