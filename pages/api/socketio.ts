@@ -13,6 +13,8 @@ const socketHandler = (req: NextApiRequest, res: NextApiResponseServerIO) => {
       const httpServer: NetServer = res.socket.server as any;
       const io = new ServerIO(httpServer, {
         path: SOCKET_PATH,
+        // @ts-ignore
+        addTrailingSlash: false,
         transports: ["polling", "websocket"],
       });
       res.socket.server.io = io;
