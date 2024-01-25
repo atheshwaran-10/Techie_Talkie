@@ -12,13 +12,19 @@ const Status = ({ muted, visible }: { muted: boolean; visible: boolean }) => {
   return (
     <div className="h-[calc(100vh-8rem)] w-[400px] overflow-y-auto">
       <div className="mb-4 flex items-center gap-2 pr-4">
-        <Image className="h-8 w-8 rounded-full" height={40} width={40} src={data?.currentUser?.image!} alt="User image" />
+        <Image
+          className="h-8 w-8 rounded-full"
+          height={40}
+          width={40}
+          src={data?.currentUser?.image!}
+          alt="User image"
+        />
         <span className="grow">{data?.currentUser?.name || "Guest"}</span>
         <div>{muted ? <MicOff /> : <MicIcon />}</div>
         <div>{visible ? <Video /> : <VideoOff />}</div>
       </div>
-      {usersEntries.map(([id]) => (
-        <div className="flex items-center gap-2 pr-4">
+      {usersEntries.map(([id], index) => (
+        <div className="flex items-center gap-2 pr-4" key={index}>
           <img
             className="h-8 w-8 rounded-full"
             src={avatars[id]}

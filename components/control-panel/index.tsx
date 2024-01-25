@@ -18,7 +18,7 @@ const ControlPanel = ({
 
   return (
     <>
-      {(screenTrack || shared) && (
+      {(screenTrack ?? shared) && ( 
         <button
           onClick={() => onToggle("fullscreen")}
           className={`${common} bg-sky-400 hover:bg-sky-500`}

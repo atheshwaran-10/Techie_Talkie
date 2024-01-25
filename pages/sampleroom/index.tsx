@@ -1,6 +1,6 @@
 "use client";
 import { createContext, useState } from "react";
-import ChannelBox from "@/app/_components/ChannelBox";
+import ChannelBox from "@/components/ChannelBox";
 import { Lobby } from "@/components/index";
 import { useMediaStream } from "@/hooks/index";
 import { NextPage, GetServerSidePropsContext, PreviewData } from "next";

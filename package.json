@@ -10,7 +10,8 @@
     "dev": "next dev",
     "postinstall": "prisma generate",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "typecheck": "npx tsc --noEmit"
   },
   "dependencies": {
     "@heroicons/react": "^2.1.1",
@@ -26,6 +27,7 @@
     "@trpc/server": "^10.43.6",
     "@types/uuid": "^9.0.7",
     "@types/ws": "^8.5.10",
+    "axios": "^1.6.6",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "lucide-react": "^0.314.0",
