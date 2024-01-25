@@ -6,7 +6,8 @@ import Status from "@/components/status"
 import { Streams, SharedScreenStream } from "@/components/streams";
 import { usePeer, useScreen } from "@/hooks/index";
 import useMediaStream from "@/hooks/use-media-stream";
-import { RTCcontext } from "@/contexts/RTCcontext";
+
+import {useSocket} from "@/contexts/RTCcontext"
 import { UsersSettingsProvider, UsersConnectionProvider } from "@/contexts";
 import {ClipLoader} from "react-spinners"
 import { useRouter } from "next/navigation";
@@ -18,7 +19,7 @@ import { Kind, PeerId } from "@/common/types";
 
 export default function ChannelBox({ stream,roomId }: { stream: MediaStream,roomId:string }) {
   const router = useRouter();
-  const socket = useContext(RTCcontext);
+  const { socket } = useSocket();
 
   const { muted, visible, toggle, toggleVideo } = useMediaStream(stream);
   const { peer, myId, isPeerReady } = usePeer(stream,roomId);
@@ -35,19 +36,20 @@ export default function ChannelBox({ stream,roomId }: { stream: MediaStream,room
       const sender = peer.peerConnection
         ?.getSenders()
         .find((s) => s.track?.kind === track.kind);
-
       sender?.replaceTrack(track);
     };
   }
 
   useEffect(() => {
+    if(!socket)
+      return;
     return () => {
       socket.disconnect();
     };
   }, []);
 
 
-  if (!isPeerReady) return <ClipLoader />;
+  if (!isPeerReady) return <ClipLoader color="red"/>;
   if (!peer) return <div>404 Not Found</div> ;
 
   async function toggleKind(kind: Kind, users?: MediaConnection[]) {

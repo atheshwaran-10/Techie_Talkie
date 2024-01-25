@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { useMediaStream } from '@/hooks/index';
-import {RTCcontext} from '@/contexts/RTCcontext';
+import {useSocket} from '@/contexts/RTCcontext';
 import { useRouter } from 'next/navigation';
 import Peer from 'peerjs';
 import { authOptions } from "@/server/auth";
@@ -15,11 +15,9 @@ import {User} from "@prisma/client"
  * Creates a peer and joins them into the room
  * @returns peer object, its id and meta-state whether is peer fully created
  */
-const usePeer = (stream: MediaStream,roomId:string) => {
-
-  const socket = useContext(RTCcontext);
+const usePeer = (stream: MediaStream, roomId: string) => {
+  const { socket, isConnected } = useSocket();
   console.log("calling signalling server");
-  socket.emit("hc");
   const room = roomId;
   const { data }: { data?: { currentUser?: User } } = useCurrentUser();
   console.log("Peer data:" + data?.currentUser?.name);
@@ -28,20 +26,25 @@ const usePeer = (stream: MediaStream,roomId:string) => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [peer, setPeer] = useState<Nullable<Peer>>(null);
-  const [myId, setMyId] = useState<PeerId>('');
+  const [myId, setMyId] = useState<PeerId>("");
 
   useEffect(() => {
+    if (!isConnected) {
+      console.log("Socket not connected yet. Waiting for connection...");
+      return;
+    }
+
     (async function createPeerAndJoinRoom() {
       try {
-        const peer = new (await import('peerjs')).default();
+        const peer = new (await import("peerjs")).default();
         setPeer(peer);
         setIsLoading(false);
-        
-        peer.on('open', (id) => {
+
+        peer.on("open", (id) => {
           console.log("Peer data2:" + data?.currentUser?.name);
-          console.log('your device id: ', id);
+          console.log("your device id: ", id);
           setMyId(id);
-          socket.emit("room:join", {
+          socket?.emit("room:join", {
             room,
             user: {
               id,
@@ -53,13 +56,13 @@ const usePeer = (stream: MediaStream,roomId:string) => {
           });
         });
 
-        peer.on('error',error('error on peer'));
+        peer.on("error", error("error on peer"));
       } catch (e) {
-        console.log("error:cannot create peer")
-        error('Unable to create peer')(e);
+        console.log("error: cannot create peer");
+        error("Unable to create peer")(e);
       }
     })();
-  }, []);
+  }, [socket, isConnected]);
 
   return {
     peer,
@@ -69,3 +72,4 @@ const usePeer = (stream: MediaStream,roomId:string) => {
 };
 
 export default usePeer;
+

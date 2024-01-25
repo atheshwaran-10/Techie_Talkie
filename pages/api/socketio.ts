@@ -29,9 +29,9 @@ const socketHandler = (req: NextApiRequest, res: NextApiResponseServerIO) => {
       })
       
       socket.on("room:join", ({ room, user }) => {
-
+        
         socket.join(room);
-
+        console.log("User has joined"+user);
         socket.to(room).emit("user:joined", user);
 
         socket.on("disconnect", () => {

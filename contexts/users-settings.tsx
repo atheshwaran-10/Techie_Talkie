@@ -4,13 +4,13 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { KeyValue, Nullable, PeerId, RoomId } from '@/common/types';
 import { append } from '@/common/utils';
 
-import {RTCcontext} from './RTCcontext';
+import {useSocket} from './RTCcontext';
 
 export const UsersUpdaterContext = createContext<any>({});
 export const UsersStateContext = createContext<any>({});
 
 export default function UsersSettingsProvider({ children }: any) {
-  const socket = useContext(RTCcontext);
+  const {socket} = useSocket();
 
   const [streams, setStreams] = useState<Record<PeerId, JSX.Element>>({});
 
@@ -23,12 +23,14 @@ export default function UsersSettingsProvider({ children }: any) {
     useState<Nullable<MediaStreamTrack>>(null);
 
   useEffect(() => {
+    if (!socket) return;
     socket.on('user:toggled-video', (peerId: PeerId) =>
       setIsHidden(append({ [peerId]: !isHidden[peerId] }))
     );
   }, [isHidden]);
 
   useEffect(() => {
+    if (!socket) return;
     socket.on('user:toggled-audio', (peerId: PeerId) =>
       setIsMuted(append({ [peerId]: !isMuted[peerId] }))
     );

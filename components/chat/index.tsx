@@ -4,19 +4,21 @@ import { UserMessage } from '@/common/types';
 import { MYSELF } from '@/common/constants';
 import { append, formatTimeHHMM } from '@/common/utils';
 
-import {RTCcontext} from '@/contexts/RTCcontext';
+import {useSocket} from '@/contexts/RTCcontext';
 import Message from "@/components/message"
 import useCurrentUser from "@/hooks/useCurrentUser";
 import { User } from '@prisma/client';
 const Chat = () => {
   const { data }: { data?: { currentUser?: User } } = useCurrentUser();
   const username = data?.currentUser?.name;
-  const socket = useContext(RTCcontext);
+  const {socket} = useSocket();
 
   const [text, setText] = useState('');
   const [messages, setMessages] = useState<UserMessage[]>([]);
 
   useEffect(() => {
+    if(!socket)
+      return;
     socket.on('chat:get', (message: UserMessage) =>
       setMessages(append(message))
     );
@@ -27,6 +29,8 @@ const Chat = () => {
   }, []);
 
   function sendMessage(e: React.KeyboardEvent<HTMLInputElement>) {
+
+
     const messageText = (e.target as HTMLInputElement).value;
     const lastMessage = messages.at(-1);
 
@@ -39,7 +43,7 @@ const Chat = () => {
         shouldAggregate:
           lastMessage?.user === MYSELF && lastMessage?.time === timeHHMM,
       };
-
+      
       socket.emit('chat:post', message);
       setMessages(append({ ...message, user: MYSELF }));
       setText('');

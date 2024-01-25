@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { append } from '@/common/utils';
 import { useMediaStream } from '@/hooks/index';
 
-import {RTCcontext} from './RTCcontext';
+import {useSocket} from './RTCcontext';
 import  PeerVideo  from '@/components/peer';
 import { UsersStateContext, UsersUpdaterContext } from './users-settings';
 import { PeerId } from '@/common/types';
@@ -22,9 +22,7 @@ export default function UsersConnectionProvider({
   children,
 }: any) {
   const router = useRouter();
- 
-
-  const socket = useContext(RTCcontext);
+  const {socket} = useSocket();
   const { streams } = useContext(UsersStateContext);
   const {
     setIsMuted,
@@ -39,7 +37,7 @@ export default function UsersConnectionProvider({
   const [users, setUsers] = useState<any>({});
 
   function leaveRoom(id: PeerId) {
-    socket.emit('user:leave', id);
+    socket?.emit('user:leave', id);
     users[id].close();
     setStreams((s: any) => {
       const obj: any = {};
@@ -51,8 +49,8 @@ export default function UsersConnectionProvider({
   }
 
   useEffect(() => {
-    if (!peer) return;
-
+    if (!peer || !socket) return;
+    console.log("User joined")
     socket.on(
       'user:joined',
       ({ id, name, picture, muted: initMuted, visible: initVisible }: any) => {
@@ -105,7 +103,7 @@ export default function UsersConnectionProvider({
 
   useEffect(() => 
   {
-    if (!peer) return;
+    if (!peer || !socket) return;
     peer.on('call', (call: any) => {
       const { peer, metadata } = call;
       const { user, muted, visible } = metadata;
@@ -138,6 +136,7 @@ export default function UsersConnectionProvider({
   }, [peer]);
 
   useEffect(() => {
+    if (!socket) return;
     socket.on('user:left', (peerId: PeerId) => {
       if (myId === peerId) router.push('/');
       else {
@@ -153,6 +152,8 @@ export default function UsersConnectionProvider({
   }, [myId, users]);
 
   useEffect(() => {
+    if(!socket)
+      return;
     socket.on('user:shared-screen', (username: string) => {
       if (peer) {
         peer.disconnect();
@@ -167,6 +168,7 @@ export default function UsersConnectionProvider({
   }, [peer]);
 
   useEffect(() => {
+    if (!socket) return;
     socket.on('user:stopped-screen-share', () => {
       setSharedScreenTrack(null);
       toast('Stopped sharing screen');
