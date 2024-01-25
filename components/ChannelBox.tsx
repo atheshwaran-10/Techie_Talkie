@@ -6,6 +6,7 @@ import Status from "@/components/status"
 import { Streams, SharedScreenStream } from "@/components/streams";
 import { usePeer, useScreen } from "@/hooks/index";
 import useMediaStream from "@/hooks/use-media-stream";
+import {SocketIndicator}  from "../pages/components/SocketIndicator"
 
 import {useSocket} from "@/contexts/RTCcontext"
 import { UsersSettingsProvider, UsersConnectionProvider } from "@/contexts";
@@ -102,6 +103,10 @@ export default function ChannelBox({ stream,roomId }: { stream: MediaStream,room
 
   return (
     <div className="flex w-full">
+      <div className="h-12 w-44 mb-auto">
+        <SocketIndicator />
+      </div>
+
       <UsersSettingsProvider>
         <div className="hidden h-screen w-full flex-col p-4 sm:flex">
           <UsersConnectionProvider stream={stream} myId={myId} peer={peer}>
@@ -131,29 +136,28 @@ export default function ChannelBox({ stream,roomId }: { stream: MediaStream,room
             </div>
           </UsersConnectionProvider>
         </div>
-        <div className=""> 
-           <Modal
-          title={
-            modal === "chat"
-              ? "Messenger"
-              : modal === "status"
-                ? "Participants"
-                : ""
-          }
-          modal={modal}
-          onClose={() => setModal("close")}
-        >
-          <div className={modal !== "chat" ? "hidden" : ""}>
-            <Chat />
-          </div>
-          <div className={modal !== "status" ? "hidden" : ""}>
-            <Status muted={muted} visible={visible} />
-          </div>
-        </Modal>
+        <div className="">
+          <Modal
+            title={
+              modal === "chat"
+                ? "Messenger"
+                : modal === "status"
+                  ? "Participants"
+                  : ""
+            }
+            modal={modal}
+            onClose={() => setModal("close")}
+          >
+            <div className={modal !== "chat" ? "hidden" : ""}>
+              <Chat />
+            </div>
+            <div className={modal !== "status" ? "hidden" : ""}>
+              <Status muted={muted} visible={visible} />
+            </div>
+          </Modal>
         </div>
-       
       </UsersSettingsProvider>
-      <ToastContainer position='bottom-left' theme='dark' autoClose= {3000} />
+      <ToastContainer position="bottom-left" theme="dark" autoClose={3000} />
     </div>
   );
 }
