@@ -3,7 +3,6 @@ import "@/styles/globals.css";
 
 import { Inter } from "next/font/google";
 import { type Metadata } from "next";
-import {RTCContextProvider} from "@/contexts/RTCcontext"
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -50,9 +49,8 @@ export default function RootLayout({
         className={`dark overflow-y-auto overflow-x-hidden font-sans ${inter.variable} `}
       >
         <div className="loader" />
-        <RTCContextProvider>
+  
           {children}
-        </RTCContextProvider>
       </body>
     </html>
   );

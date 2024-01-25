@@ -18,9 +18,7 @@ const Page = () => {
   
 
   return (
-    <RTCContextProvider>
       <ChannelBox stream={stream!} roomId="3435" />
-    </RTCContextProvider>
   );
 };
 
