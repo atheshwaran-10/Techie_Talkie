@@ -16,6 +16,8 @@ const socketHandler = (req: NextApiRequest, res: NextApiResponseServerIO) => {
         // @ts-ignore
         addTrailingSlash: false,
         transports: ["polling", "websocket"],
+        // @ts-ignore
+        secure: true,
       });
       res.socket.server.io = io;
 
