@@ -8,13 +8,27 @@ import {cn} from "@/common/utils/utils"
 import style from "@/styles/landing.module.css"
 import {useRef} from "react"
 import { Inter } from "next/font/google";
+import { toast } from "react-hot-toast";
 import { FaGithub } from "react-icons/fa6";
-
+import { signOut, signIn } from "next-auth/react";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
 });
+
+ const socialAction = (action: string) => {
+   signIn(action, { redirect: false }).then((callback) => {
+     if (callback?.error) {
+       toast.error("Invalid credentials!");
+     }
+
+     if (callback?.ok && !callback?.error) {
+       toast.success("Login Successfull");
+     }
+   });
+ }; 
+
 
 
 
@@ -82,14 +96,16 @@ export default function Home() {
           </motion.h1>
 
           <div className="mt-5 flex flex-row items-center justify-center gap-4 gap-x-5">
-            <Link
-              href={session.data ? "/join" : "/api/auth/signin"}
+            <div
+              onClick={
+                session?.data ? () => signOut() : () => socialAction("google")
+              }
               className="rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-white/20"
             >
               Get Started
-            </Link>
+            </div>
             <Link
-              href={session.data ? "/join" : "/api/auth/signin"}
+              href={"https://github.com/atheshwaran-10/Techie_Talkie"}
               className="rounded-full bg-[rgba(5,142,247,0.968)] px-10 py-3 font-semibold no-underline transition hover:bg-[rgba(5,142,247,0.868)] "
             >
               <div className="flex flex-row gap-x-2">
