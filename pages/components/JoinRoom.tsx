@@ -10,18 +10,18 @@ const JoinRoom = () => {
   const router = useRouter();
 
   const joinRoom = () => {
-    router.push(`sampleroom/${roomId}`);
+    router.push(`room/${roomId}`);
   };
 
   return (
     <div>
-      <div className="flex justify-center">
+      <div className="flex justify-center w-[360px]">
         <Image height={250} width={250} src={image} alt="" />
       </div>
       <div className="">
         <div className="flex flex-col gap-y-5">
           <Input
-            className="w-2/3 ml-auto mr-auto"
+            className="w-[300px] ml-auto mr-auto"
             placeholder="Enter the Room ID"
             value={roomId}
             onChange={(e) => setRoomId(e.target.value)}

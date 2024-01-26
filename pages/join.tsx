@@ -5,6 +5,7 @@ import useCurrentUser from "@/hooks/useCurrentUser";
 import { Inter } from "next/font/google";
 import { User } from "@prisma/client";
 
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",

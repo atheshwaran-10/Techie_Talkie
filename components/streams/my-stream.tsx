@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-
+import {User} from "@prisma/client"
 import { MYSELF } from '@/common/constants';
 import { UsersConnectionContext } from '@/contexts/users-connection';
-
+import useCurrentUser from "@/hooks/useCurrentUser";
 import VideoContainer from '@/components/video-container';
 import  PeerVideo  from '@/components/peer';
 
@@ -15,7 +15,8 @@ export default function MyStream({
   muted: boolean;
   visible: boolean;
 }) {
-  const avatar ='';
+  const { data }: { data?: { currentUser?: User } } = useCurrentUser();
+  const avatar =data?.currentUser?.image;
   const { myId } = useContext(UsersConnectionContext);
 
   return (
@@ -24,7 +25,7 @@ export default function MyStream({
       muted={muted}
       visible={visible}
       stream={stream}
-      userPicture={avatar}
+      userPicture={avatar!}
     >
       <PeerVideo stream={stream} name={MYSELF} isMe={true} />
     </VideoContainer>

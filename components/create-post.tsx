@@ -8,9 +8,6 @@ export function CreatePost() {
   const router = useRouter();
   const [name, setName] = useState("");
 
-  const createPost =()=>{
-    console.log("CREATED")
-  };
 
   return (
     <form

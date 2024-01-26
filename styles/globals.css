@@ -70,7 +70,27 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+     .orange_gradient {
+       @apply bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 bg-clip-text text-transparent;
+     }
+  
+     .rose_gradient {
+       @apply bg-gradient-to-r from-red-600 via-red-600 to-red-900 bg-clip-text text-transparent;
+     }
+  
+     .green_gradient {
+       @apply bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent;
+     }
+  
+     .blue_gradient {
+       @apply bg-gradient-to-r from-cyan-300 to-sky-200 bg-clip-text text-transparent;
+     }
+  
+     .red_gradient {
+       @apply bg-gradient-to-r from-amber-600 to-pink-600 bg-clip-text text-transparent;
+     }
 }

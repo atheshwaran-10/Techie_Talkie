@@ -107,7 +107,6 @@ export const RTCContextProvider = ({ children }: { children: React.ReactNode }) 
 //      return () => {
 //        socketInstance.disconnect();
 //      };
-//      console.log("connected:"+isConnected);
 //    }, []);
    
 //   return (

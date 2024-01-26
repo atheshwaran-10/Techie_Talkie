@@ -2,6 +2,7 @@ import Head from "next/head";
 import type { AppProps } from "next/app";
 import "@/styles/globals.css";
 import { RTCContextProvider } from "@/contexts/RTCcontext";
+import { NextUIProvider } from "@nextui-org/react";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -14,7 +15,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         />
       </Head>
       <RTCContextProvider>
-        <Component {...pageProps} />
+        <NextUIProvider>
+          <Component {...pageProps} />
+        </NextUIProvider>
       </RTCContextProvider>
     </>
   );

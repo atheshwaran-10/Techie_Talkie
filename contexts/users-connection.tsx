@@ -50,7 +50,6 @@ export default function UsersConnectionProvider({
 
   useEffect(() => {
     if (!peer || !socket) return;
-    console.log("User joined")
     socket.on(
       'user:joined',
       ({ id, name, picture, muted: initMuted, visible: initVisible }: any) => {

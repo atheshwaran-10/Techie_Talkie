@@ -11,7 +11,7 @@ export const createContext = async (
 ) => {
   const session = await getSession(opts);
 
-  console.log("createContext for", session?.user?.name ?? "unknown user");
+  //console.log("createContext for", session?.user?.name ?? "unknown user");
 
   return {
     session,

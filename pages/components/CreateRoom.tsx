@@ -1,7 +1,9 @@
 "use client"
 import React from 'react'
 import Image from "next/image"
+import {useEffect} from "react"
 import {useRouter} from "next/navigation"
+import { Snippet } from "@nextui-org/react";
 import image from "@/public/images/iamge4.png";
 import { v4 as uuidv4 } from "uuid";
 import { useState } from 'react';
@@ -11,12 +13,15 @@ const CreateRoom = () => {
   const [roomId,setRoomId]=useState('');
   const router=useRouter();
 
-  const generateId=()=>{
-    setRoomId(uuidv4());
-  }
+ 
+  
+ useEffect(() => {
+   setRoomId(uuidv4());
+ }, [setRoomId]);
+ 
 
   const createRoom=()=>{
-    router.push(`sampleroom/${roomId}`);
+    router.push(`room/${roomId}`);
   }
 
   return (
@@ -26,14 +31,12 @@ const CreateRoom = () => {
       </div>
       <div className="">
         <div className="flex flex-col gap-y-5">
-          <div className='flex flex-row gap-x-5'>
-            <Button
-              className="ml-auto mr-auto w-1/3 bg-sky-400 hover:bg-sky-500"
-              onClick={generateId}
-            >
-              Generate RoomId
-            </Button>
-            {roomId.length > 0 ? <div>{roomId}</div> : <div>Generate Your Own RoomId</div>}
+          <div className="flex flex-row gap-x-5">
+            {roomId.length > 0 ? (
+              <Snippet>{roomId}</Snippet>
+            ) : (
+              <div>Room cannot be created</div>
+            )}
           </div>
 
           <Button

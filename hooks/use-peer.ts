@@ -20,7 +20,7 @@ const usePeer = (stream: MediaStream, roomId: string) => {
   console.log("calling signalling server");
   const room = roomId;
   const { data }: { data?: { currentUser?: User } } = useCurrentUser();
-  console.log("Peer data:" + data?.currentUser?.name);
+ 
 
   const { muted, visible } = useMediaStream(stream);
 
@@ -41,8 +41,8 @@ const usePeer = (stream: MediaStream, roomId: string) => {
         setIsLoading(false);
 
         peer.on("open", (id) => {
-          console.log("Peer data2:" + data?.currentUser?.name);
-          console.log("your device id: ", id);
+          //console.log("Peer data2:" + data?.currentUser?.name);
+          //console.log("your device id: ", id);
           setMyId(id);
           socket?.emit("room:join", {
             room,
