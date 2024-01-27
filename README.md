@@ -1,28 +1,77 @@
-# Create T3 App
+<h1 align="center" id="title">Techie_Talkie</h1>
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+<p align="center"><img src="https://i.ibb.co/sQ2srpZ/Mac-Book-Air-4.png" alt="project-image"></p>
 
-## What's next? How do I make an app with this?
+<p id="description">Techie_Talkie is a Virtual Meeting Application that enables folks to interact among themselves and connect through seamless features.</p>
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+<p align="center"><img src="https://img.shields.io/badge/Next.Js-black?style=flat&amp;labelColor=black%20blue" alt="shields"><img src="https://img.shields.io/badge/NextAuth-orange?style=flat&amp;labelColor=black%20blue" alt="shields"><img src="https://img.shields.io/badge/WebRTC-red?style=flat&amp;labelColor=black%20blue" alt="shields"><img src="https://img.shields.io/badge/Socket.io-white?style=flat&amp;labelColor=black%20blue" alt="shields"></p>
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+<h2>🚀 Demo</h2>
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+[https://xpandify.vercel.app](https://xpandify.vercel.app)
 
-## Learn More
+  
+  
+<h2>🧐 Features</h2>
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+Here're some of the project's best features:
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+*   Real Time Communication
+*   Next-Auth
+*   Peer Group Communication
+*   Screen-Share
+*   Audio and Video Calls
+*   Group Meeting
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+<h2>🛠️ Installation Steps:</h2>
 
-## How do I deploy this?
+<p>1. Clone the Repo</p>
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+```
+git clone https://github.com/atheshwaran-10/XPandify.git
+```
+
+<p>2. Enter the Project Directory</p>
+
+```
+cd XPandify
+```
+
+<p>3. Install the dependencies</p>
+
+```
+npm i
+```
+
+<p>4. Add the Environmental Variables</p>
+
+```
+DATABASE_URL=
+NEXTAUTH_SECRET=
+NEXTAUTH_URL=
+DISCORD_CLIENT_ID=
+DISCORD_CLIENT_SECRET=
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+```
+
+<p>5. Run the App in development server</p>
+
+```
+npm run dev
+```
+
+  
+  
+<h2>💻 Built with</h2>
+
+Technologies used in the project:
+
+*   Next.Js
+*   TypeScript
+*   Tailwind
+*   Prisma
+*   Next-Auth
+*   WebRTC
+*   PeerJs
+*   Socket.io
