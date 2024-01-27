@@ -1,3 +1,4 @@
+"use client"
 import { unstable_noStore as noStore } from "next/cache";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
@@ -11,6 +12,7 @@ import { Inter } from "next/font/google";
 import { toast } from "react-hot-toast";
 import { FaGithub } from "react-icons/fa6";
 import { signOut, signIn } from "next-auth/react";
+import {useRouter} from "next/navigation"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -35,6 +37,7 @@ const inter = Inter({
 export default function Home() {
   noStore();
   const session = useCurrentUser();
+  const router=useRouter();
   //console.log(session.data)
  const ref = useRef(null);
  const isInView = useInView(ref) as boolean;
@@ -98,9 +101,9 @@ export default function Home() {
           <div className="mt-5 flex flex-row items-center justify-center gap-4 gap-x-5">
             <div
               onClick={
-                session?.data ? () => signOut() : () => socialAction("google")
+                session?.data ? () => router.push("/join") : () => socialAction("google")
               }
-              className="rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-white/20"
+              className="rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-white/20 cursor-pointer"
             >
               Get Started
             </div>
