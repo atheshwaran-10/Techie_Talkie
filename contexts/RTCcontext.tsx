@@ -24,9 +24,9 @@ export const RTCContextProvider = ({ children }: { children: React.ReactNode }) 
 
   useEffect(() => {
     const socketInstance = new (ClientIO as any)(
-      process.env.NEXT_PUBLIC_SITE_URL!,
+      process.env.NEXT_PUBLIC_SOCKERT_URL!,
       {
-        path: "/api/socketio",
+        path: "/api/socket",
         addTrailingSlash: false,
       },
     );

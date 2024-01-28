@@ -18,6 +18,7 @@ const config = {
       "t3.ftcdn.net",
     ],
   },
+  
 };
 
 export default config;
