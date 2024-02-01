@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 
 import { UserMessage } from '@/common/types';
-import { MYSELF } from '@/common/constants';
 import { append, formatTimeHHMM } from '@/common/utils';
 
 import {useSocket} from '@/contexts/RTCcontext';
@@ -41,11 +40,11 @@ const Chat = () => {
         text: messageText,
         time: timeHHMM,
         shouldAggregate:
-          lastMessage?.user === MYSELF && lastMessage?.time === timeHHMM,
+        lastMessage?.user === "You" && lastMessage?.time === timeHHMM,
       };
       
       socket.emit('chat:post', message);
-      setMessages(append({ ...message, user: MYSELF }));
+      setMessages(append({ ...message, user: "You" }));
       setText('');
     }
   }

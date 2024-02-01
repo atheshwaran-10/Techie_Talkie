@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import {User} from "@prisma/client"
-import { MYSELF } from '@/common/constants';
 import { UsersConnectionContext } from '@/contexts/users-connection';
 import useCurrentUser from "@/hooks/useCurrentUser";
 import VideoContainer from '@/components/video-container';
@@ -27,7 +26,7 @@ export default function MyStream({
       stream={stream}
       userPicture={avatar!}
     >
-      <PeerVideo stream={stream} name={MYSELF} isMe={true} />
+      <PeerVideo stream={stream} name={"You"} isMe={true} />
     </VideoContainer>
   );
 }

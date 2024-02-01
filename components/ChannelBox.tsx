@@ -47,7 +47,7 @@ export default function ChannelBox({ stream,roomId }: { stream: MediaStream,room
     return () => {
       socket.disconnect();
     };
-  }, []);
+  }, [socket]);
 
 
   if (!isPeerReady) return <ClipLoader color="red"/>;
@@ -158,7 +158,7 @@ export default function ChannelBox({ stream,roomId }: { stream: MediaStream,room
           </Modal>
         </div>
       </UsersSettingsProvider>
-      <ToastContainer position="bottom-left" theme="dark" autoClose={3000} />
+      <ToastContainer position="bottom-left" theme="light" autoClose={3000} />
     </div>
   );
 }

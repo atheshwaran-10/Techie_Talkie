@@ -55,7 +55,6 @@ export default function UsersSettingsProvider({ children }: any) {
           setStreams,
           setNames,
           setSharedScreenTrack,
-          muteUser: (id: PeerId) => socket.emit('host:mute-user', id),
         }}
       >
         {children}

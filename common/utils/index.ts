@@ -27,10 +27,6 @@ export function createRoomId(): RoomId {
   return nanoid();
 }
 
-export function createHost(roomId: RoomId): void {
-  window.localStorage.setItem(roomId, '*');
-}
-
 export function append<T>(appendant: any) {
   return (target: KeyValue<T> | T[]) => {
     if (target instanceof Array) return target.concat(appendant);
@@ -46,6 +42,3 @@ export function error(message: string) {
   };
 }
 
-export function isHost(roomId: RoomId): boolean {
-  return typeof window !== 'undefined' && !!window.localStorage.getItem(roomId);
-}

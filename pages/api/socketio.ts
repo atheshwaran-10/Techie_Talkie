@@ -1,15 +1,13 @@
 import { NextApiRequest } from "next";
 import { Server as NetServer } from "http";
-import { Server as ServerIO } from "socket.io";
-
+import { Server as ServerIO } from "socket.io"
 import { NextApiResponseServerIO } from "@/common/types";
 import { SOCKET_PATH } from "@/common/constants";
 
 const socketHandler = (req: NextApiRequest, res: NextApiResponseServerIO) => {
-  if (!res.socket.server.io) {
+  if (!res.socket.server.io) 
+  {
     console.log("Socket is initializing");
-
-    //const httpServer = res.socket.server;
       const httpServer: NetServer = res.socket.server as any;
       const io = new ServerIO(httpServer, {
         path: SOCKET_PATH,
@@ -37,14 +35,6 @@ const socketHandler = (req: NextApiRequest, res: NextApiResponseServerIO) => {
 
         socket.on("user:leave", (userId) => {
           socket.to(room).emit("user:left", userId);
-        });
-
-        socket.on("host:mute-user", (userId) => {
-          socket.to(room).emit("host:muted-user", userId);
-        });
-
-        socket.on("host:remove-user-shared-screen", () => {
-          socket.to(room).emit("host:removed-user-shared-screen");
         });
 
         socket.on("user:toggle-audio", (userId) => {

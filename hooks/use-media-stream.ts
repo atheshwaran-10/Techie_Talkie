@@ -16,8 +16,10 @@ export default function useStream(stream: Nullable<MediaStream> = null) {
       setM(!audio!.enabled);
       setV(video!.enabled);
     } else {
-      (async function createStream() {
-        try {
+      (async function createStream() 
+      {
+        try 
+        {
           const stream = await navigator.mediaDevices.getUserMedia({
             audio: true,
             video: true,
@@ -25,9 +27,11 @@ export default function useStream(stream: Nullable<MediaStream> = null) {
 
           setState(stream);
           setStatus('success');
-        } catch (error) {
+        } 
+        catch (error) 
+        {
           setStatus('rejected');
-          console.error('Access denied for audio and video stream', error);
+          console.error('Access denied for audio and video stream',error);
         }
       })();
     }

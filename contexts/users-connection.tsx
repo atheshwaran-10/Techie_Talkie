@@ -1,5 +1,4 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import placeholder from "@/public/images/placeholder.png"
 import { toast } from 'react-toastify';
 
 import { append } from '@/common/utils';
